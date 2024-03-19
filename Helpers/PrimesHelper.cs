@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace ProgrammierAufgabe_RSA.Helpers;
 
-internal class NewPrimesHelper
+internal class PrimesHelper
 {
     private static readonly RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
 

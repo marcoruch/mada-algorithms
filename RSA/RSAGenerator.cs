@@ -12,7 +12,7 @@ internal class RSAGenerator
     /// </summary>
     public static void GenerateRSA()
     {
-        (BigInteger FirstPrime, BigInteger SecondPrime) primesResult = NewPrimesHelper.GetSetOfDistinctBigPrimes();
+        (BigInteger FirstPrime, BigInteger SecondPrime) primesResult = PrimesHelper.GetSetOfDistinctBigPrimes();
         BigInteger p = primesResult.FirstPrime;
         BigInteger q = primesResult.SecondPrime;
         Console.WriteLine($"Generated RSA primes: {p}, {q}");
@@ -26,10 +26,9 @@ internal class RSAGenerator
         BigInteger phiN = BigInteger.Multiply(pMinus1, qMinus1);
         Console.WriteLine($"n: {n}");
 
-
         // Wählen von e und Berechnen von d
-        var e = EDHelper.GetE();
-        var d = EDHelper.CalculateD(e, phiN);
+        var e = GetE();
+        var d = CalculateD(e, phiN);
         Console.WriteLine($"e: {e}, d: {d}");
 
         // Bereitstellen von public-key und private-key
@@ -38,5 +37,27 @@ internal class RSAGenerator
 
         FilesHelper.SaveKeyToFile("pk.txt", n, e);
         FilesHelper.SaveKeyToFile("sk.txt", n, d);
+    }
+
+    /// <summary>
+    /// Gibt unser statisch gewähltes e zurück, e köntne auch etwas anderes sein aber wir nehmen das Standard e.
+    /// </summary>
+    /// <returns>Oft als Standard genutztes e mit Wert "65537"</returns>
+    public static BigInteger GetE()
+    {
+        return 65537;
+    }
+
+    /// <summary>
+    /// Berechnen von d via dem erweiterten eujklidischen algorithmus
+    /// </summary>
+    /// <param name="e">Öffentlicher Exponent e</param>
+    /// <param name="phiN">Phi (φ) von n</param>
+    /// <returns>Privater Exponent d</returns>
+    public static BigInteger CalculateD(BigInteger e, BigInteger phiN)
+    {
+        BigInteger d = AlgorithmsHelper.ExtendedEuclideanAlgorithm(e, phiN);
+        d = (d % phiN + phiN) % phiN;
+        return d;
     }
 }
