@@ -19,7 +19,7 @@ internal class RSAEncryptor
         StringBuilder encryptedText = new();
         foreach (char asciiCode in inputText)
         {
-            BigInteger encryptedAscii = BigInteger.ModPow(asciiCode, e, n);
+            BigInteger encryptedAscii = AlgorithmsHelper.FastModularExponentiation(asciiCode, e, n);
             encryptedText.Append(encryptedAscii);
             encryptedText.Append(',');
         }

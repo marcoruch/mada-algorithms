@@ -32,5 +32,42 @@ namespace ProgrammierAufgabe_RSA.Helpers
 
             return x0;
         }
+
+        /// <summary>
+        /// Schnelle modulo exponentation, für grosse Zahlen implementiert, in C# auch direkt möglich durch BigIntegers ModPow-Methode
+        /// </summary>
+        /// <param name="baseValue">Basis-Wert grösser 0</param>
+        /// <param name="exponent">Exponent des Basis-Werts, muss grösser 0 sein</param>
+        /// <param name="modulus">Modulus</param>
+        /// <returns>Das Resultat des Algorithmus als BigInteger</returns>
+        public static BigInteger FastModularExponentiation(BigInteger baseValue, BigInteger exponent, BigInteger modulus)
+        {
+            if (modulus == 1) return 0;
+            if (exponent == 1) return baseValue % modulus;
+
+            // h
+            BigInteger result = 1;
+
+            // Reduce initial value with modulus directly as this can reduce follow up operations significantly (performance) and modulus can always be applied to base value..
+            baseValue %= modulus;
+
+            while (exponent > 0)
+            {
+                // Check the most right bit against the bitmask 1 to see if we should perform this step
+                if ((exponent & 1) == 1)
+                {
+                    // h = h*k mod x
+                    result = result * baseValue % modulus;
+                }
+
+                // k = k^2 mod x
+                baseValue = baseValue * baseValue % modulus;
+
+                // Move to next bit of exponent by shifting the most right bit away
+                exponent >>= 1;
+            }
+
+            return result;
+        }
     }
 }

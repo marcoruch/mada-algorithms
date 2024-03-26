@@ -22,7 +22,7 @@ internal class RSADecryptor
             BigInteger encryptedAscii = BigInteger.Parse(encryptedAsciiCode);
 
             // decrypt to char
-            BigInteger decryptedAscii = BigInteger.ModPow(encryptedAscii, d, n);
+            BigInteger decryptedAscii = AlgorithmsHelper.FastModularExponentiation(encryptedAscii, d, n);
 
             decryptedTextBuilder.Append((char)decryptedAscii);
         }
