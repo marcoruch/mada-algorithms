@@ -1,4 +1,4 @@
-﻿using ProgrammierAufgabe_RSA.Helpers;
+﻿using Helpers;
 
 using System.Numerics;
 using System.Text;

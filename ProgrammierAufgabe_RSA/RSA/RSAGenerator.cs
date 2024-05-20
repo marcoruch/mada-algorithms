@@ -1,7 +1,6 @@
-﻿using ProgrammierAufgabe_RSA.Helpers;
+﻿using Helpers;
 
 using System.Numerics;
-using System.Security.Cryptography;
 
 namespace ProgrammierAufgabe_RSA.RSA;
 

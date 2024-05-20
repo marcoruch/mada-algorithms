@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace ProgrammierAufgabe_RSA.Helpers;
+namespace Helpers;
 
-internal class FilesHelper
+public class FilesHelper
 {
     /// <summary>
     /// Liest das n-key pair aus der Datei im Format (n, key)
@@ -33,5 +33,23 @@ internal class FilesHelper
             writer.WriteLine($"({n}, {key})");
         }
         Console.WriteLine($"Key saved to {filename}");
+    }
+
+    /// <summary>
+    /// ASCII-Code von Zeichen1:Code von Zeichen1-ASCII-Code von Zeichen2:Code von Zeichen2-
+    /// Das letzte Zeichen erhält keinen Abschluss-Separator "-".
+    /// </summary>
+    /// <param name="huffmanCode">{ASCII-Zeichencode:Code-} Mapping</param>
+    /// <param name="fileName"></param>
+    public static void SaveCodeTable(Dictionary<char, string> huffmanCode, string fileName)
+    {
+        using StreamWriter writer = new StreamWriter(fileName);
+        var count = huffmanCode.Count;
+        for (int i = 0; i < count; i++)
+        {
+            string separator = i == count - 1 ? "" : "-";
+            var entry = huffmanCode.Skip(i).Take(1).First();
+            writer.Write($"{(int)entry.Key}:{entry.Value}{separator}");
+        }
     }
 }

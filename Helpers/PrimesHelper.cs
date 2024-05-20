@@ -1,9 +1,9 @@
 ﻿using System.Numerics;
 using System.Security.Cryptography;
 
-namespace ProgrammierAufgabe_RSA.Helpers;
+namespace Helpers;
 
-internal class PrimesHelper
+public class PrimesHelper
 {
     private static readonly RandomNumberGenerator randomNumberGenerator = RandomNumberGenerator.Create();
 
@@ -97,7 +97,7 @@ internal class PrimesHelper
 
         for (int i = 0; i < k; i++)
         {
-            BigInteger a = GenerateRandomBigInteger(2, n - 2);
+            BigInteger a = BigIntegerHelper.GenerateRandomBigInteger(2, n - 2, randomNumberGenerator);
             BigInteger x = BigInteger.ModPow(a, d, n);
             if (x == 1 || x == n - 1)
             {
@@ -122,24 +122,5 @@ internal class PrimesHelper
         }
 
         return true;
-    }
-
-    /// <summary>
-    /// Methode zur Generierung einer zufälligen BigInteger-Zahl im angegebenen Bereich
-    /// </summary>
-    /// <param name="min">Minimum</param>
-    /// <param name="max">Maximum</param>
-    /// <returns>Neuer Big Integer zwischen den Boundaries</returns>
-    private static BigInteger GenerateRandomBigInteger(BigInteger min, BigInteger max)
-    {
-        byte[] bytes = max.ToByteArray();
-        
-        // Zufällige Folge von Bytes wird hier generiert in das ByteArray
-        randomNumberGenerator.GetBytes(bytes);
-        BigInteger value = new BigInteger(bytes);
-        
-        // Min-Max Prüfung.
-        value = BigInteger.Abs(value) % (max - min) + min;
-        return value;
     }
 }

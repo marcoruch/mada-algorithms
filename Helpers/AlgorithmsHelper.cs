@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace ProgrammierAufgabe_RSA.Helpers
+namespace Helpers
 {
-    internal static class AlgorithmsHelper
+    public static class AlgorithmsHelper
     {
         /// <summary>        
         /// Berechnung des inversen Elements von a modulo b.
