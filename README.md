@@ -1,6 +1,6 @@
 # Algorithms for MADA.
 
-Es gibt einfach 3 Konsolenapps jetzt (neu Elgamal Encryption und Huffman-Compression). 
+Es gibt einfach 4 Konsolenapps jetzt (neu Elgamal Encryption und Huffman-Compression sowie Rainbow-Table generierung (MD5 Hashing)). 
  
 Da alles eingecheckt wurde sollte man einfach die gewünschte Aufgaben-.exe starten können im jeweiligen "\bin\Debug\net7.0" Ordner und mit 1-3 die Funktionalitäten starten, die von der App geforderten Files müssen sich ebenfalls im Ordner befinden damit die Vorgänge funktionieren.
 
@@ -11,3 +11,5 @@ Da alles eingecheckt wurde sollte man einfach die gewünschte Aufgaben-.exe star
 ## Huffmann-Code
 
 ## ElGamal Encryption/Decryption/Gen
+
+## Rainbow-Table
